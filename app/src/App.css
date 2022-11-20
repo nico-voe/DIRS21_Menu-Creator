@@ -6,6 +6,7 @@
   background-image: url(images/restaurant.jpg);
   background-size: cover;
   background-position: center;
+  background-repeat: repeat;
 }
 
 form {
@@ -32,4 +33,25 @@ button {
   cursor: pointer;
   margin-top: 15px;
   margin-bottom: 30px;
+}
+
+@media (min-width: 600px) {
+  .open-search {
+    position: fixed;
+    right: 5%;
+    bottom: 40%;
+  }
+  .open-search a {
+    color: #333;
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #fff;
+    background-size: 100px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    font-size: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+  }
 }

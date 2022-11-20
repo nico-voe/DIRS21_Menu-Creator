@@ -1,26 +1,27 @@
 import { useState } from "react";
 import { useForm, useController } from "react-hook-form";
 import "./Form.css";
-import Select from "react-select";
+
+const url = "http://localhost:9000/";
 
 const Form = () => {
   const { register, control, handleSubmit } = useForm();
 
-  const { field } = useController(
-    { name: "category", control },
-    { name: "availability", control }
-  );
-
-  const apiPost = (formValues) => {
+  const apiPost = async (formValues) => {
     console.log("formValues", formValues);
+    const requestOptions = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formValues),
+    };
+    const response = await fetch(`${url}dishes`, requestOptions);
+    console.log("response", response);
+    const data = await response.json();
+    console.log("data", data);
   };
 
   const handleSave = (formValues) => {
     apiPost(formValues);
-  };
-
-  const handleSelect = (option) => {
-    field.onChange(option.value);
   };
 
   const categories = [
@@ -55,27 +56,30 @@ const Form = () => {
 
         <div className="formInput">
           <label>Category</label>
-          <Select
-            className="select"
-            options={categories}
-            value={categories.find(({ value }) => value === field.value)}
-            onChange={handleSelect}
-          />
+          <select {...register("category")}>
+            {categories.map((category, i) => (
+              <option key={i} value={category.value}>
+                {" "}
+                {category.label}{" "}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="formInput">
           <label>Available for</label>
-          <Select
-            className="select"
-            options={availabilities}
-            value={availabilities.find(({ value }) => value === field.value)}
-            onChange={handleSelect}
-          />
+          <select {...register("availability")}>
+            {availabilities.map((time, i) => (
+              <option key={i} value={time.value}>
+                {time.label}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="formInput">
           <label>Waiting time in minutes</label>
-          <input {...register("number")} type="number" min="0" max="100" />
+          <input {...register("waitingTime")} type="number" min="0" max="100" />
         </div>
 
         <button type="submit">Submit</button>
