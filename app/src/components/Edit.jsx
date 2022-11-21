@@ -64,7 +64,7 @@ const Edit = () => {
           <label>Dish Name</label>
           <input
             {...register("name")}
-            placeholder="Dish"
+            maxlength="18"
             value={dishForEdit.name}
             onChange={(e) =>
               setDishForEdit({
@@ -78,7 +78,7 @@ const Edit = () => {
           <label>Description</label>
           <input
             {...register("description")}
-            placeholder="Description"
+            maxlength="60"
             value={dishForEdit.description}
             onChange={(e) =>
               setDishForEdit({ ...dishForEdit, description: e.target.value })
@@ -90,7 +90,8 @@ const Edit = () => {
           <input
             {...register("price")}
             type="number"
-            placeholder="Price"
+            min="0"
+            max="1000"
             value={dishForEdit.price}
             onChange={(e) =>
               setDishForEdit({ ...dishForEdit, price: e.target.value })
