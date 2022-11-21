@@ -41,6 +41,7 @@ code {
     font-size: 20px;
     padding: 20px;
     box-sizing: border-box;
+    text-decoration: none;
   }
   .open-menu-edit a {
     position: fixed;
@@ -57,5 +58,6 @@ code {
     font-size: 20px;
     padding: 20px;
     box-sizing: border-box;
+    text-decoration: none;
   }
 }

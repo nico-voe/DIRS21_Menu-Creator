@@ -9,14 +9,16 @@ const Edit = () => {
 
   const { id } = useParams();
 
-  const [dishForEdit, setDishForEdit] = useState([]);
+  const [dishForEdit, setDishForEdit] = useState({});
+  console.log("dishForEdit", dishForEdit);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await fetch(`${url}dishes/${id}`);
         const data = await res.json();
         setDishForEdit(data.data);
-        console.log("dishEdit", data);
+        console.log("dishEditData", data);
       } catch (err) {
         console.log("Error", err);
       }
@@ -25,10 +27,10 @@ const Edit = () => {
   }, []);
 
   //Post data to API
-  const { register, control, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const apiPost = async (formValues) => {
-    console.log("formValues", formValues);
+    console.log("EDITformValues", formValues);
     const requestOptions = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -67,6 +69,13 @@ const Edit = () => {
             {...register("name")}
             placeholder="Dish"
             value={dishForEdit.name}
+            onChange={(e) =>
+              setDishForEdit({
+                ...dishForEdit,
+                name: e.target.value,
+                _id: { id },
+              })
+            }
           />
         </div>
         <div className="formInput">
@@ -75,20 +84,33 @@ const Edit = () => {
             {...register("description")}
             placeholder="Description"
             value={dishForEdit.description}
+            onChange={(e) =>
+              setDishForEdit({ ...dishForEdit, description: e.target.value })
+            }
           />
         </div>
         <div className="formInput">
           <label>Price</label>
           <input
             {...register("price")}
+            type="number"
             placeholder="Price"
             value={dishForEdit.price}
+            onChange={(e) =>
+              setDishForEdit({ ...dishForEdit, price: e.target.value })
+            }
           />
         </div>
 
         <div className="formInput">
           <label>Category</label>
-          <select {...register("category")} value={dishForEdit.category}>
+          <select
+            {...register("category")}
+            value={dishForEdit.category}
+            onChange={(e) =>
+              setDishForEdit({ ...dishForEdit, category: e.target.value })
+            }
+          >
             {categories.map((category, i) => (
               <option key={i} value={category.value}>
                 {category.label}
@@ -102,6 +124,9 @@ const Edit = () => {
           <select
             {...register("availability")}
             value={dishForEdit.availability}
+            onChange={(e) =>
+              setDishForEdit({ ...dishForEdit, availability: e.target.value })
+            }
           >
             {availabilities.map((time, i) => (
               <option key={i} value={time.value}>
@@ -119,6 +144,9 @@ const Edit = () => {
             min="0"
             max="100"
             value={dishForEdit.waitingTime}
+            onChange={(e) =>
+              setDishForEdit({ ...dishForEdit, waitingTime: e.target.value })
+            }
           />
         </div>
 

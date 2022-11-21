@@ -5,7 +5,7 @@ import "./Form.css";
 const url = "http://localhost:9000/";
 
 const Form = () => {
-  const { register, control, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const apiPost = async (formValues) => {
     console.log("formValues", formValues);
