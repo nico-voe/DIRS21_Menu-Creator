@@ -3,12 +3,14 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const MenuCard = () => {
+  const url = "http://localhost:9000/";
+
   const [dishes, setDishes] = useState([]);
   const [render, setRender] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("http://localhost:9000/dishes");
+        const res = await fetch(`${url}dishes`);
         const data = await res.json();
         setDishes(data.data);
         console.log("data", data);
@@ -21,7 +23,7 @@ const MenuCard = () => {
 
   const deleteDish = async (e, id) => {
     e.preventDefault();
-    const deleteDish = await fetch(`http://localhost:9000/dishes/${id}`, {
+    const deleteDish = await fetch(`${url}dishes/${id}`, {
       method: "DELETE",
     });
     const data = await deleteDish.json();
@@ -47,10 +49,9 @@ const MenuCard = () => {
                   <p>{dish.availability}</p>
                   <h4>Waiting time</h4>
                   <p>{`${dish.waitingTime} minutes`}</p>
-                  <Link to="/edit">Edit</Link>
+                  <Link to={`edit/${dish._id}`}>Edit</Link>
                   <a
                     className="remove"
-                    href="#"
                     onClick={(e) => deleteDish(e, dish._id)}
                   >
                     Remove
