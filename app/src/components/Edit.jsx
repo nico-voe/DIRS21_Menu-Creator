@@ -44,7 +44,7 @@ const Edit = () => {
     const requestOptions = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...formValues, _id: id }),
+      body: JSON.stringify(formValues),
     };
     const response = await fetch(`${url}dishes`, requestOptions);
     const data = await response.json();
@@ -53,7 +53,7 @@ const Edit = () => {
   };
 
   const handleSave = (formValues) => {
-    apiPost(formValues);
+    apiPost({ ...formValues, _id: id });
   };
 
   return (
@@ -141,11 +141,13 @@ const Edit = () => {
             min="0"
             max="100"
             value={dishForEdit.waitingTime}
-            onChange={(e) => setDishForEdit({})}
+            onChange={(e) =>
+              setDishForEdit({ ...dishForEdit, waitingTime: e.target.value })
+            }
           />
         </div>
 
-        <button className="menu-edit" type="submit">
+        <button className="edit" type="submit">
           Edit
         </button>
       </form>
