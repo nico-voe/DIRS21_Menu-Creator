@@ -1,4 +1,3 @@
-import "./Form.css";
 import { useState, useEffect } from "react";
 import { useForm, useController } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -146,7 +145,7 @@ const Edit = () => {
           />
         </div>
 
-        <button className="edit" type="submit">
+        <button className="menu-edit" type="submit">
           Edit
         </button>
       </form>

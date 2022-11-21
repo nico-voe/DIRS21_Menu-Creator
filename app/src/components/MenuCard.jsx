@@ -1,4 +1,3 @@
-import "./MenuCard.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -32,7 +31,7 @@ const MenuCard = () => {
   };
 
   return (
-    <div className="container">
+    <div className="bcontainer">
       {dishes.length ? (
         dishes.map((dish) => (
           <div className="container" key={dish._id}>
@@ -49,7 +48,9 @@ const MenuCard = () => {
                   <p>{dish.availability}</p>
                   <h4>Waiting time</h4>
                   <p>{`${dish.waitingTime} minutes`}</p>
-                  <Link to={`edit/${dish._id}`}>Edit</Link>
+                  <Link className="menu-edit" to={`edit/${dish._id}`}>
+                    Edit
+                  </Link>
                   <a
                     className="remove"
                     onClick={(e) => deleteDish(e, dish._id)}
