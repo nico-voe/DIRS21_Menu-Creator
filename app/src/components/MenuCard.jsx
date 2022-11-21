@@ -1,7 +1,8 @@
 import "./MenuCard.css";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-const MenuCard = ({ showMenuCards, setShowMenuCards }) => {
+const MenuCard = () => {
   const [dishes, setDishes] = useState([]);
   const [render, setRender] = useState(false);
   useEffect(() => {
@@ -46,11 +47,13 @@ const MenuCard = ({ showMenuCards, setShowMenuCards }) => {
                   <p>{dish.availability}</p>
                   <h4>Waiting time</h4>
                   <p>{`${dish.waitingTime} minutes`}</p>
-                  <a href="#" onClick={() => setShowMenuCards(!showMenuCards)}>
-                    Edit
-                  </a>
-                  <a href="#" onClick={(e) => deleteDish(e, dish._id)}>
-                    X
+                  <Link to="/edit">Edit</Link>
+                  <a
+                    className="remove"
+                    href="#"
+                    onClick={(e) => deleteDish(e, dish._id)}
+                  >
+                    Remove
                   </a>
                 </div>
               </div>
