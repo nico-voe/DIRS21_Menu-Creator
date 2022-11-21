@@ -24,7 +24,6 @@ router.get("/dishes", (req, res) => {
 // clear dishes
 router.get("/dishes/clear", (req, res) => {
   _dishes = [];
-
   res.json({
     status: "OK",
   });
@@ -60,8 +59,14 @@ router.put("/dishes", (req, res) => {
       //
       _dishes.push(dish);
     } else {
+      console.log("_dishes", _dishes);
+
       //
-      const dishIndex = _dishes.findIndex((x) => x._id === dish._id);
+      const dishIndex = _dishes.findIndex((x) => {
+        return x._id === dish._id;
+      });
+      console.log("dishIndex", dishIndex);
+      console.log("dish", dish);
 
       //
       if (dishIndex >= 0) {

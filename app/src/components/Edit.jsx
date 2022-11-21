@@ -1,16 +1,29 @@
 import { useState, useEffect } from "react";
 import { useForm, useController } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import "./Form.css";
 import { useParams } from "react-router-dom";
 const url = "http://localhost:9000/";
+
+const categories = [
+  { value: "Starter", label: "Starter" },
+  { value: "Main Course", label: "Main Course" },
+  { value: "Dessert", label: "Dessert" },
+  { value: "Beverage", label: "Beverage" },
+];
+const availabilities = [
+  { value: "Breakfast", label: "Breakfast" },
+  { value: "Lunch", label: "Lunch" },
+  { value: "Dinner", label: "Dinner" },
+];
 
 const Edit = () => {
   //fetch specific dish data from api to display in Form
 
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [dishForEdit, setDishForEdit] = useState({});
-  console.log("dishForEdit", dishForEdit);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,29 +47,17 @@ const Edit = () => {
     const requestOptions = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formValues),
+      body: JSON.stringify({ ...formValues, _id: id }),
     };
     const response = await fetch(`${url}dishes`, requestOptions);
-    console.log("response", response);
     const data = await response.json();
-    console.log("data", data);
+    if (!data.status === "OK") return alert("Something went wrong");
+    navigate("/menu");
   };
 
   const handleSave = (formValues) => {
     apiPost(formValues);
   };
-
-  const categories = [
-    { value: "Starter", label: "Starter" },
-    { value: "Main Course", label: "Main Course" },
-    { value: "Dessert", label: "Dessert" },
-    { value: "Beverage", label: "Beverage" },
-  ];
-  const availabilities = [
-    { value: "Breakfast", label: "Breakfast" },
-    { value: "Lunch", label: "Lunch" },
-    { value: "Dinner", label: "Dinner" },
-  ];
 
   return (
     <div className="formInput">
@@ -73,7 +74,6 @@ const Edit = () => {
               setDishForEdit({
                 ...dishForEdit,
                 name: e.target.value,
-                _id: { id },
               })
             }
           />
@@ -144,9 +144,7 @@ const Edit = () => {
             min="0"
             max="100"
             value={dishForEdit.waitingTime}
-            onChange={(e) =>
-              setDishForEdit({ ...dishForEdit, waitingTime: e.target.value })
-            }
+            onChange={(e) => setDishForEdit({})}
           />
         </div>
 

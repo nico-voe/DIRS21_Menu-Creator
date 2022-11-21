@@ -4,6 +4,18 @@ import "./Form.css";
 
 const url = "http://localhost:9000/";
 
+const categories = [
+  { value: "Starter", label: "Starter" },
+  { value: "Main Course", label: "Main Course" },
+  { value: "Dessert", label: "Dessert" },
+  { value: "Beverage", label: "Beverage" },
+];
+const availabilities = [
+  { value: "Breakfast", label: "Breakfast" },
+  { value: "Lunch", label: "Lunch" },
+  { value: "Dinner", label: "Dinner" },
+];
+
 const Form = () => {
   const { register, handleSubmit } = useForm();
 
@@ -23,18 +35,6 @@ const Form = () => {
   const handleSave = (formValues) => {
     apiPost(formValues);
   };
-
-  const categories = [
-    { value: "Starter", label: "Starter" },
-    { value: "Main Course", label: "Main Course" },
-    { value: "Dessert", label: "Dessert" },
-    { value: "Beverage", label: "Beverage" },
-  ];
-  const availabilities = [
-    { value: "Breakfast", label: "Breakfast" },
-    { value: "Lunch", label: "Lunch" },
-    { value: "Dinner", label: "Dinner" },
-  ];
 
   return (
     <div className="formInput">
@@ -59,8 +59,7 @@ const Form = () => {
           <select {...register("category")}>
             {categories.map((category, i) => (
               <option key={i} value={category.value}>
-                {" "}
-                {category.label}{" "}
+                {category.label}
               </option>
             ))}
           </select>
