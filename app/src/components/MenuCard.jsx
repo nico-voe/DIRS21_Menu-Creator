@@ -13,7 +13,6 @@ const MenuCard = () => {
         const res = await fetch(`${url}dishes`);
         const data = await res.json();
         setDishes(data.data);
-        console.log("data", data);
       } catch (err) {
         console.log("Error", err);
       }
