@@ -7,6 +7,7 @@ const MenuCard = () => {
 
   const [dishes, setDishes] = useState([]);
   const [render, setRender] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -32,9 +33,9 @@ const MenuCard = () => {
 
   return (
     <div className="container">
-      {dishes ? (
+      {dishes.length ? (
         dishes.map((dish) => (
-          <div className="container">
+          <div className="container" key={dish._id}>
             <div className="card">
               <div className="box">
                 <div className="content">

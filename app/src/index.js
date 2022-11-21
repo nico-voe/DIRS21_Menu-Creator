@@ -1,6 +1,6 @@
+import "./index.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import Form from "./components/Form";
 import Edit from "./components/Edit";
 import MenuCard from "./components/MenuCard";

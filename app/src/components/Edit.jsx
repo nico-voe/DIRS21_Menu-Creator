@@ -1,8 +1,9 @@
+import "./Form.css";
 import { useState, useEffect } from "react";
 import { useForm, useController } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import "./Form.css";
 import { useParams } from "react-router-dom";
+
 const url = "http://localhost:9000/";
 
 const categories = [
@@ -18,8 +19,6 @@ const availabilities = [
 ];
 
 const Edit = () => {
-  //fetch specific dish data from api to display in Form
-
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -39,7 +38,6 @@ const Edit = () => {
     fetchData();
   }, []);
 
-  //Post data to API
   const { register, handleSubmit } = useForm();
 
   const apiPost = async (formValues) => {

@@ -1,6 +1,6 @@
+import "./Form.css";
 import { useState } from "react";
 import { useForm, useController } from "react-hook-form";
-import "./Form.css";
 
 const url = "http://localhost:9000/";
 
@@ -17,19 +17,18 @@ const availabilities = [
 ];
 
 const Form = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const apiPost = async (formValues) => {
-    console.log("formValues", formValues);
     const requestOptions = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formValues),
     };
     const response = await fetch(`${url}dishes`, requestOptions);
-    console.log("response", response);
     const data = await response.json();
-    console.log("data", data);
+    if (!data.status === "OK") return alert("Something went wrong");
+    reset();
   };
 
   const handleSave = (formValues) => {
@@ -43,20 +42,27 @@ const Form = () => {
 
         <div className="formInput">
           <label>Dish Name</label>
-          <input {...register("name")} placeholder="Dish" />
+          <input {...register("name", { required: true })} placeholder="Dish" />
         </div>
         <div className="formInput">
           <label>Description</label>
-          <input {...register("description")} placeholder="Description" />
+          <input
+            {...register("description", { required: true })}
+            placeholder="Description"
+          />
         </div>
         <div className="formInput">
           <label>Price</label>
-          <input {...register("price")} placeholder="Price" />
+          <input
+            {...register("price", { required: true })}
+            placeholder="Price"
+            type="number"
+          />
         </div>
 
         <div className="formInput">
           <label>Category</label>
-          <select {...register("category")}>
+          <select {...register("category", { required: true })}>
             {categories.map((category, i) => (
               <option key={i} value={category.value}>
                 {category.label}
@@ -67,7 +73,7 @@ const Form = () => {
 
         <div className="formInput">
           <label>Available for</label>
-          <select {...register("availability")}>
+          <select {...register("availability", { required: true })}>
             {availabilities.map((time, i) => (
               <option key={i} value={time.value}>
                 {time.label}
@@ -78,7 +84,12 @@ const Form = () => {
 
         <div className="formInput">
           <label>Waiting time in minutes</label>
-          <input {...register("waitingTime")} type="number" min="0" max="100" />
+          <input
+            {...register("waitingTime", { required: true })}
+            type="number"
+            min="0"
+            max="100"
+          />
         </div>
 
         <button type="submit">Submit</button>
