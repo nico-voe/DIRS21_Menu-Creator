@@ -29,7 +29,6 @@ const Edit = () => {
         const res = await fetch(`${url}dishes/${id}`);
         const data = await res.json();
         setDishForEdit(data.data);
-        console.log("dishEditData", data);
       } catch (err) {
         console.log("Error", err);
       }
@@ -53,7 +52,7 @@ const Edit = () => {
   };
 
   const handleSave = (formValues) => {
-    apiPost({ ...formValues, _id: id });
+    apiPost({ ...formValues, ...dishForEdit, _id: id });
   };
 
   return (
