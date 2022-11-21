@@ -41,13 +41,18 @@ const Form = () => {
 
         <div className="formInput">
           <label>Dish Name</label>
-          <input {...register("name", { required: true })} placeholder="Dish" />
+          <input
+            {...register("name", { required: true })}
+            placeholder="Dish"
+            maxlength="18"
+          />
         </div>
         <div className="formInput">
           <label>Description</label>
           <input
             {...register("description", { required: true })}
             placeholder="Description"
+            maxlength="60"
           />
         </div>
         <div className="formInput">
@@ -56,6 +61,8 @@ const Form = () => {
             {...register("price", { required: true })}
             placeholder="Price"
             type="number"
+            min="0"
+            max="1000"
           />
         </div>
 

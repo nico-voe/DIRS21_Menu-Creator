@@ -211,6 +211,10 @@ h3 {
   z-index: 1;
   transition: 0.5s;
   margin-bottom: 15px;
+  overflow-wrap: break-word;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 p {
@@ -219,6 +223,10 @@ p {
   color: rgba(255, 255, 255, 0.9);
   z-index: 1;
   transition: 0.5s;
+  overflow-wrap: break-word;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 a {
