@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: rgb(23, 23, 23);
 }
 
 code {
@@ -127,7 +128,7 @@ input:invalid[focused="true"] {
   background-color: rgb(2, 100, 2);
 }
 
-/* MENU CARD CSS */
+/* MENU CARD CSS*/
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&display=swap");
 
@@ -147,10 +148,6 @@ input:invalid[focused="true"] {
   height: 100vh;
   margin-left: 10%;
   margin-right: 10%;
-}
-
-body {
-  background: rgb(23, 23, 23);
 }
 
 .card {
