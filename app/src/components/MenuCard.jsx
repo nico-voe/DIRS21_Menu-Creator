@@ -26,7 +26,6 @@ const MenuCard = () => {
       method: "DELETE",
     });
     const data = await deleteDish.json();
-    console.log("data", data);
     setRender(!render);
   };
 

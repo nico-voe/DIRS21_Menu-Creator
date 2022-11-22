@@ -21,7 +21,7 @@ const Edit = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [dishForEdit, setDishForEdit] = useState({});
+  const [dishForEdit, setDishForEdit] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,7 +39,6 @@ const Edit = () => {
   const { register, handleSubmit } = useForm();
 
   const apiPost = async (formValues) => {
-    console.log("EDITformValues", formValues);
     const requestOptions = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -64,8 +63,8 @@ const Edit = () => {
           <label>Dish Name</label>
           <input
             {...register("name")}
-            maxlength="18"
-            value={dishForEdit.name}
+            maxLength="18"
+            value={dishForEdit.name || ""}
             onChange={(e) =>
               setDishForEdit({
                 ...dishForEdit,
@@ -78,8 +77,8 @@ const Edit = () => {
           <label>Description</label>
           <input
             {...register("description")}
-            maxlength="60"
-            value={dishForEdit.description}
+            maxLength="60"
+            value={dishForEdit.description || ""}
             onChange={(e) =>
               setDishForEdit({ ...dishForEdit, description: e.target.value })
             }
@@ -92,7 +91,7 @@ const Edit = () => {
             type="number"
             min="0"
             max="1000"
-            value={dishForEdit.price}
+            value={dishForEdit.price || ""}
             onChange={(e) =>
               setDishForEdit({ ...dishForEdit, price: e.target.value })
             }
@@ -103,13 +102,13 @@ const Edit = () => {
           <label>Category</label>
           <select
             {...register("category")}
-            value={dishForEdit.category}
+            value={dishForEdit.category || ""}
             onChange={(e) =>
               setDishForEdit({ ...dishForEdit, category: e.target.value })
             }
           >
             {categories.map((category, i) => (
-              <option key={i} value={category.value}>
+              <option key={i} value={category.value || ""}>
                 {category.label}
               </option>
             ))}
@@ -120,13 +119,13 @@ const Edit = () => {
           <label>Available for</label>
           <select
             {...register("availability")}
-            value={dishForEdit.availability}
+            value={dishForEdit.availability || ""}
             onChange={(e) =>
               setDishForEdit({ ...dishForEdit, availability: e.target.value })
             }
           >
             {availabilities.map((time, i) => (
-              <option key={i} value={time.value}>
+              <option key={i} value={time.value || ""}>
                 {time.label}
               </option>
             ))}
@@ -140,7 +139,7 @@ const Edit = () => {
             type="number"
             min="0"
             max="100"
-            value={dishForEdit.waitingTime}
+            value={dishForEdit.waitingTime || ""}
             onChange={(e) =>
               setDishForEdit({ ...dishForEdit, waitingTime: e.target.value })
             }

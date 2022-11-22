@@ -8,11 +8,6 @@ body {
   background: rgb(23, 23, 23);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
 .root {
   display: flex;
   align-items: center;
@@ -64,14 +59,6 @@ code {
 }
 
 /* FORM CSS */
-
-.formInput {
-  display: flex;
-  flex-direction: column;
-  width: 280px;
-  margin-left: auto;
-  margin-right: auto;
-}
 
 form {
   background-color: white;
@@ -127,17 +114,22 @@ input:invalid[focused="true"] {
 .edit {
   background-color: rgb(2, 100, 2);
 }
+.formInput {
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 /* MENU CARD CSS*/
-
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&display=swap");
 
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  height: 100vh;
+  margin-top: 50px;
 }
 
 .bcontainer {
