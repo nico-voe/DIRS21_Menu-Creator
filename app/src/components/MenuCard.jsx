@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { fetchDishes } from "../APIS";
 
 const MenuCard = () => {
   const url = "http://localhost:9000/";
@@ -8,16 +9,12 @@ const MenuCard = () => {
   const [render, setRender] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch(`${url}dishes`);
-        const data = await res.json();
-        setDishes(data.data);
-      } catch (err) {
-        console.log("Error", err);
-      }
+    const getDishes = async () => {
+      const res = await fetchDishes();
+      console.log("res", res);
+      setDishes(res.data);
     };
-    fetchData();
+    getDishes();
   }, [render]);
 
   const deleteDish = async (e, id) => {
