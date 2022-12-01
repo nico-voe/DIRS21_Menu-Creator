@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { useForm, useController } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-
-const url = "http://localhost:9000/";
+import { apiPost, fetchDishForEdit } from "../APIS";
 
 const categories = [
   { value: "Starter", label: "Starter" },
@@ -17,6 +16,8 @@ const availabilities = [
   { value: "Dinner", label: "Dinner" },
 ];
 
+const url = "http://localhost:9000/";
+
 const Edit = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -25,38 +26,22 @@ const Edit = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const res = await fetch(`${url}dishes/${id}`);
-        const data = await res.json();
-        setDishForEdit(data.data);
-      } catch (err) {
-        console.log("Error", err);
-      }
+      const res = await fetchDishForEdit(id);
+      setDishForEdit(res.data);
     };
     fetchData();
   }, []);
 
   const { register, handleSubmit } = useForm();
 
-  const apiPost = async (formValues) => {
-    const requestOptions = {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formValues),
-    };
-    const response = await fetch(`${url}dishes`, requestOptions);
-    const data = await response.json();
-    if (!data.status === "OK") return alert("Something went wrong");
+  const post = async (formValues) => {
+    const data = await apiPost({ ...formValues, ...dishForEdit, _id: id });
     navigate("/menu");
-  };
-
-  const handleSave = (formValues) => {
-    apiPost({ ...formValues, ...dishForEdit, _id: id });
   };
 
   return (
     <div className="formInput">
-      <form className="formInput" onSubmit={handleSubmit(handleSave)}>
+      <form className="formInput" onSubmit={handleSubmit(post)}>
         <h1>Edit Dish</h1>
 
         <div className="formInput">

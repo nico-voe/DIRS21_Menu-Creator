@@ -28,3 +28,13 @@ export const apiPost = async (formValues) => {
   const data = await response.json();
   if (!data.status === "OK") return alert("Something went wrong");
 };
+
+export const fetchDishForEdit = async (id) => {
+  try {
+    const res = await fetch(`${url}dishes/${id}`);
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.log("Error", err);
+  }
+};
