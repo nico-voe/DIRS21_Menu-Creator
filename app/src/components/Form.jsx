@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useForm, useController } from "react-hook-form";
+import { apiPost } from "../APIS";
 
 const url = "http://localhost:9000/";
 
@@ -18,25 +19,14 @@ const availabilities = [
 const Form = () => {
   const { register, handleSubmit, reset } = useForm();
 
-  const apiPost = async (formValues) => {
-    const requestOptions = {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formValues),
-    };
-    const response = await fetch(`${url}dishes`, requestOptions);
-    const data = await response.json();
-    if (!data.status === "OK") return alert("Something went wrong");
+  const post = async (formValues) => {
+    const data = await apiPost(formValues);
     reset();
-  };
-
-  const handleSave = (formValues) => {
-    apiPost(formValues);
   };
 
   return (
     <div className="formInput">
-      <form className="formInput" onSubmit={handleSubmit(handleSave)}>
+      <form className="formInput" onSubmit={handleSubmit(post)}>
         <h1>Add Dish To Menu</h1>
 
         <div className="formInput">

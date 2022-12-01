@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import { deleteDish, fetchDishes } from "../APIS";
 
 const MenuCard = () => {
-  const url = "http://localhost:9000/";
-
   const [dishes, setDishes] = useState([]);
   const [render, setRender] = useState(false);
 

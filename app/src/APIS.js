@@ -17,3 +17,14 @@ export const deleteDish = async (e, id) => {
   });
   const data = await deleteDish.json();
 };
+
+export const apiPost = async (formValues) => {
+  const requestOptions = {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(formValues),
+  };
+  const response = await fetch(`${url}dishes`, requestOptions);
+  const data = await response.json();
+  if (!data.status === "OK") return alert("Something went wrong");
+};
