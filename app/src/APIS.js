@@ -9,3 +9,11 @@ export const fetchDishes = async () => {
     console.log("Error", err);
   }
 };
+
+export const deleteDish = async (e, id) => {
+  e.preventDefault();
+  const deleteDish = await fetch(`${url}dishes/${id}`, {
+    method: "DELETE",
+  });
+  const data = await deleteDish.json();
+};
